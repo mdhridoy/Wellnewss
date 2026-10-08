@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#3f9b1e">
+<link rel="manifest" href="manifest.json">
+<title>Le Monde Wellness First CIC</title>
+<style>
+:root{--g:#3f9b1e;--gd:#1f4d1a;--gl:#eef7e8;--y:#f4d03f;--ink:#16241a;--mut:#5d6b60;--bg:#fafcf8}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+#app{height:100%;display:flex;flex-direction:column;max-width:560px;margin:0 auto}
+header{padding:calc(12px + env(safe-area-inset-top)) 16px 10px;display:flex;align-items:center;gap:10px;background:#fff;border-bottom:1px solid #e6eee1}
+header img{width:38px;height:38px;border-radius:50%}
+header b{font-size:16px;color:var(--gd)} header small{display:block;color:var(--mut);font-size:12px}
+main{flex:1;overflow-y:auto;padding:16px}
+nav{display:flex;background:#fff;border-top:1px solid #e6eee1;padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;border:0;background:none;padding:10px 0 8px;font-size:11px;font-weight:700;color:var(--mut);letter-spacing:.5px}
+nav button span{display:block;font-size:20px;margin-bottom:2px}
+nav button.on{color:var(--g)}
+h1{font-size:24px;margin:4px 0 4px;color:var(--gd)} h2{font-size:18px;margin:18px 0 8px;color:var(--gd)}
+p{line-height:1.5;margin:6px 0} .mut{color:var(--mut);font-size:14px}
+.card{background:#fff;border-radius:16px;padding:14px;margin:10px 0;box-shadow:0 1px 6px rgba(0,0,0,.07)}
+.dark{background:var(--gd);color:#fff}.dark .mut{color:#cfe6c6}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.chip{border:0;border-radius:999px;padding:10px 16px;background:#e8eee4;font-weight:700;font-size:14px;color:var(--ink)}
+.chip.on{background:var(--y);color:var(--gd)}
+.btn{display:block;width:100%;border:0;border-radius:14px;padding:14px;background:var(--g);color:#fff;font-weight:800;font-size:16px;margin:12px 0}
+.btn.alt{background:var(--gl);color:var(--gd)}
+input{width:100%;padding:13px;border:1px solid #cfdccb;border-radius:12px;font-size:16px;margin:6px 0}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.stat{flex:1;text-align:center}.stat b{display:block;font-size:28px;color:var(--g)}
+.hide{display:none}.ex{padding:10px 0;border-bottom:1px solid #eef2eb}.ex:last-child{border:0}
+a{color:var(--g);font-weight:700}
+.bub{padding:10px 14px;border-radius:14px;margin:6px 0;max-width:85%;line-height:1.4}
+.me{background:var(--g);color:#fff;margin-left:auto}.bot{background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.safe{font-size:12px;color:var(--mut);text-align:center;margin:18px 0 8px}
+</style></head><body>
+<div id="app">
+<header><img src="logo-192.png" alt="Le Monde logo"><div><b>Le Monde Wellness First CIC</b><small>Move. Eat. Live well.</small></div></header>
+<main id="main"></main>
+<nav id="nav"></nav>
+</div>
+<script>
+var TABS=[["home","🏠","TODAY"],["move","💪","MOVE"],["eat","🥗","EAT"],["coach","💬","COACH"],["track","📈","TRACK"],["learn","📖","LEARN"]];
+var SITE="https://lemondewellnessfirstcic.com/", MAIL="info@lemondewellnessfirstcic.com", TEL="+447539705404";
+var S=load();
+function load(){try{return JSON.parse(localStorage.getItem("lm")||"")||fresh()}catch(e){return fresh()}}
+function fresh(){return{name:"",place:"Home",mins:20,done:[],weights:[],saved:[],chat:[]}}
+function save(){try{localStorage.setItem("lm",JSON.stringify(S))}catch(e){}}
+var tab="home";
+var WORK={Home:["Squats","Push-ups (or knee push-ups)","Glute bridges","Plank","Reverse lunges","Mountain climbers","Wall sit","Standing marches"],
+Park:["Brisk walk or light jog","Bench step-ups","Walking lunges","Incline push-ups on a bench","Skipping or high knees","Bench dips","Stretch and cool-down"],
+Gym:["Goblet squat","Dumbbell row","Chest press","Romaine-free deadlift (light)".replace("Romaine-free ","Romanian "),"Lat pulldown","Plank","Treadmill walk"]};
+function plan(){var n={10:4,20:6,30:7,45:8}[S.mins]||6,l=WORK[S.place];return l.slice(0,Math.min(n,l.length))}
+var MEALS={Breakfast:[["Overnight oats with berries","10 min","Oats, milk or plant milk, berries, seeds",1],["Veggie omelette","10 min","Eggs, peppers, spinach, tomato",1],["Greek yoghurt bowl","5 min","Yoghurt, fruit, nuts",1]],
+Lunch:[["Chickpea salad wrap","15 min","Chickpeas, wholemeal wrap, cucumber, salad leaves",1],["Lentil and vegetable soup","30 min","Lentils, carrot, onion, stock",1],["Tuna and sweetcorn jacket potato","20 min","Potato, tuna, sweetcorn",1]],
+Dinner:[["Baked salmon with veg","25 min","Salmon, broccoli, new potatoes",1],["Chicken and vegetable stir-fry","20 min","Chicken, mixed veg, soy sauce, rice",1],["Bean chilli","35 min","Beans, tomatoes, onion, spices",1]],
+Snacks:[["Fruit and nut pot","2 min","Apple or banana, small handful of nuts",1],["Hummus and veg sticks","5 min","Hummus, carrot, cucumber",1]]};
+var LEARN=[["Building a balanced plate","Aim for about half vegetables or fruit, a quarter whole grains and a quarter protein. Add healthy fats in small amounts and drink water through the day."],
+["Why sleep and recovery matter","Muscles and mood both recover while you sleep. Regular sleep times, less caffeine late in the day and rest days make training easier to keep up."],
+["Supplements: the basics","Most people can get what they need from food. Vitamin D is commonly recommended in the UK during autumn and winter. Speak to a GP, pharmacist or registered dietitian before starting any supplement, especially if you are pregnant, on medication or have a health condition."],
+["Making habits stick","Start small, attach the habit to something you already do, and track it. Missing a day is fine. Just restart the next day."]];
+var TIPS={water:"Aim to sip water regularly through the day. Pale yellow urine is a simple sign you are drinking enough.",
+protein:"Include a source of protein at each meal, such as eggs, fish, beans, lentils, tofu, yoghurt or lean meat.",
+motiv:"Pick the smallest version of your workout, even 10 minutes, and just start. Starting is the hardest part.",
+sleep:"Try a regular bedtime, keep screens out of the last 30 minutes, and avoid caffeine late in the day.",
+weight:"Slow, steady change is easier to keep. Focus on regular meals, more vegetables and daily movement. For a personal plan, book a consultation."};
+function esc(t){var d=document.createElement("div");d.textContent=t;return d.innerHTML}
+function today(){return new Date().toISOString().slice(0,10)}
+function streak(){var d=new Date(),n=0;while(1){var k=d.toISOString().slice(0,10);if(S.done.indexOf(k)>-1){n++;d.setDate(d.getDate()-1)}else if(n==0&&k==today()){d.setDate(d.getDate()-1)}else break}return n}
+function render(){
+ var m=document.getElementById("main");
+ if(!S.name){m.innerHTML=welcome();return}
+ m.innerHTML=VIEWS[tab]();
+ document.getElementById("nav").innerHTML=TABS.map(function(t){return '<button class="'+(t[0]==tab?"on":"")+'" onclick="go(\''+t[0]+'\')"><span>'+t[1]+'</span>'+t[2]+'</button>'}).join("");
+ m.scrollTop=0;
+}
+function go(t){tab=t;render()}
+function welcome(){document.getElementById("nav").innerHTML="";
+ return '<h1>Welcome 👋</h1><p class="mut">Your personal plan for movement, food and healthy habits. Tell us a little about you.</p><div class="card"><p><b>What should we call you?</b></p><input id="nm" placeholder="Your first name"><p><b>Where will you train?</b></p><div class="chips">'+["Home","Park","Gym"].map(function(p){return '<button class="chip '+(S.place==p?"on":"")+'" onclick="S.place=\''+p+'\';keepName();render()">'+p+'</button>'}).join("")+'</div><p><b>How long do you have?</b></p><div class="chips">'+[10,20,30,45].map(function(p){return '<button class="chip '+(S.mins==p?"on":"")+'" onclick="S.mins='+p+';keepName();render()">'+p+(p==45?"+":"")+' min</button>'}).join("")+'</div></div><button class="btn" onclick="start()">Create my plan</button><p class="safe">This app gives general wellbeing information and is not medical advice.</p>'}
+function keepName(){var n=document.getElementById("nm");if(n&&n.value)S.tmp=n.value}
+function start(){var n=document.getElementById("nm").value.trim()||S.tmp||"Friend";S.name=n;delete S.tmp;save();tab="home";render()}
+function chips(){return '<div class="chips">'+["Home","Park","Gym"].map(function(p){return '<button class="chip '+(S.place==p?"on":"")+'" onclick="S.place=\''+p+'\';save();render()">'+p+'</button>'}).join("")+'</div><div class="chips">'+[10,20,30,45].map(function(p){return '<button class="chip '+(S.mins==p?"on":"")+'" onclick="S.mins='+p+';save();render()">'+p+(p==45?"+":"")+' min</button>'}).join("")+'</div>'}
+var VIEWS={
+home:function(){var d=S.done.indexOf(today())>-1;return '<h1>Hello, '+esc(S.name)+'</h1><p class="mut">Your daily plan</p><div class="card dark"><div class="mut">TODAY · '+S.mins+' min · '+S.place+'</div><h2 style="color:#fff;margin:6px 0">'+(d?"Workout done ✅":"Full body session")+'</h2><p class="mut">'+plan().length+' exercises, no special kit needed</p><button class="btn" onclick="go(\'move\')" style="background:var(--y);color:var(--gd)">'+(d?"View workout":"Start now")+'</button></div><div class="card"><div class="row"><div><b>Meal idea</b><p class="mut">'+MEALS.Dinner[new Date().getDate()%3][0]+'</p></div><button class="chip" onclick="go(\'eat\')">See meals</button></div></div><div class="row"><div class="card stat"><b>'+streak()+'</b><span class="mut">day streak</span></div><div class="card stat"><b>'+S.done.length+'</b><span class="mut">workouts</span></div></div>'+foot()},
+move:function(){var d=S.done.indexOf(today())>-1;return '<h1>MOVE</h1><p class="mut">Where are we training?</p>'+chips()+'<div class="card"><h2 style="margin-top:0">Full body</h2>'+plan().map(function(e,i){return '<div class="ex"><b>'+(i+1)+'.</b> '+esc(e)+'<div class="mut">'+(S.mins>=30?"3 rounds":"2 rounds")+' · 30–40 sec work, rest 20 sec</div></div>'}).join("")+'</div><p class="mut">Go at your own pace and stop if anything hurts. Check with your GP before starting new exercise if you have a health condition.</p><button class="btn" onclick="finish()">'+(d?"Completed today ✅":"Mark workout complete")+'</button>'},
+eat:function(){return '<h1>EAT</h1><p class="mut">Simple, healthy meals. Tap ♡ to save a recipe to your shopping list.</p>'+Object.keys(MEALS).map(function(c){return '<h2>'+c+'</h2>'+MEALS[c].map(function(r){var k=r[0],on=S.saved.indexOf(k)>-1;return '<div class="card row"><div><b>'+r[0]+'</b><div class="mut">'+r[1]+' · '+r[2]+'</div></div><button class="chip '+(on?"on":"")+'" onclick="tog(\''+k.replace(/'/g,"\\'")+'\')">'+(on?"♥":"♡")+'</button></div>'}).join("")}).join("")+'<h2>Shopping list</h2><div class="card">'+(S.saved.length?S.saved.map(shopRow).join(""):'<p class="mut">Save a recipe to build your list.</p>')+'</div><p class="mut">More recipes: <a href="'+SITE+'cookery-recipes-for-a-healthy-lifestyle/" target="_blank">Le Monde recipes</a></p>'},
+coach:function(){return '<h1>COACH</h1><p class="mut">Ask a quick question or tap a topic.</p><div class="chips">'+[["water","Water"],["protein","Protein"],["motiv","Motivation"],["sleep","Sleep"],["weight","Weight"]].map(function(t){return '<button class="chip" onclick="ask(\''+t[0]+'\',\''+t[1]+'\')">'+t[1]+'</button>'}).join("")+'</div><div>'+S.chat.map(function(c){return '<div class="bub '+c[0]+'">'+esc(c[1])+'</div>'}).join("")+'</div><div class="card"><b>Talk to a real nutritionist</b><p class="mut">For a personal plan, allergies or a health condition, book a consultation.</p><a class="btn" href="'+SITE+'our-consultation-and-price/" target="_blank" style="text-align:center;text-decoration:none">Book a consultation</a><a class="btn alt" href="tel:'+TEL+'" style="text-align:center;text-decoration:none">Call</a><a class="btn alt" href="mailto:'+MAIL+'" style="text-align:center;text-decoration:none">Email</a></div>'},
+track:function(){var w=S.weights;return '<h1>TRACK</h1><div class="row"><div class="card stat"><b>'+streak()+'</b><span class="mut">streak</span></div><div class="card stat"><b>'+S.done.length+'</b><span class="mut">workouts</span></div></div><div class="card"><b>Weight (kg)</b><div class="row"><input id="wt" type="number" step="0.1" placeholder="e.g. 72.5"><button class="chip on" onclick="addW()">Add</button></div>'+chart(w)+'</div><button class="btn alt" onclick="if(confirm(\'Clear all your data?\')){S=fresh();save();render()}">Reset my data</button>'},
+learn:function(){return '<h1>LEARN</h1><p class="mut">Plain-language tips.</p>'+LEARN.map(function(a){return '<div class="card"><b>'+a[0]+'</b><p>'+a[1]+'</p></div>'}).join("")+'<p><a href="'+SITE+'blog/" target="_blank">Read the Le Monde blog →</a></p>'+foot()}};
+function foot(){return '<p class="safe">General wellbeing information only, not medical advice. Your data stays on this device.</p>'}
+function finish(){if(S.done.indexOf(today())<0)S.done.push(today());save();render()}
+function tog(k){var i=S.saved.indexOf(k);i>-1?S.saved.splice(i,1):S.saved.push(k);save();render()}
+function shopRow(k){var all=[].concat.apply([],Object.keys(MEALS).map(function(c){return MEALS[c]})),r=all.filter(function(x){return x[0]==k})[0];return '<div class="ex"><b>'+esc(k)+'</b><div class="mut">'+esc(r?r[2]:"")+'</div></div>'}
+function ask(k,l){S.chat.push(["me",l]);S.chat.push(["bot",TIPS[k]]);S.chat=S.chat.slice(-12);save();render();var m=document.getElementById("main");m.scrollTop=m.scrollHeight}
+function addW(){var v=parseFloat(document.getElementById("wt").value);if(!v)return;S.weights.push([today(),v]);S.weights=S.weights.slice(-30);save();render()}
+function chart(w){if(w.length<2)return '<p class="mut">Add at least two entries to see your trend.</p>';var v=w.map(function(x){return x[1]}),mn=Math.min.apply(0,v)-1,mx=Math.max.apply(0,v)+1,pts=v.map(function(y,i){return (10+i*(280/(v.length-1)))+","+(110-(y-mn)/(mx-mn)*100)}).join(" ");return '<svg viewBox="0 0 300 120" width="100%"><polyline fill="none" stroke="#3f9b1e" stroke-width="3" points="'+pts+'"/></svg><p class="mut">Latest: '+v[v.length-1]+' kg</p>'}
+render();
+</script></body></html>
